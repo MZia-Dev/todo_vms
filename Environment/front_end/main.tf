@@ -1,7 +1,8 @@
 module "azurerm_resource_group" {
   source                  = "../../Modules/azurerm_resource_group"
-  resource_group_name     = "todo_app_rg"
-  resource_group_location = "West US"
+  for_each = var.rgs
+  resource_group_name     = each.value.name
+  resource_group_location = each.value.location
 }
 
 module "azurerm_virtual_network" {
